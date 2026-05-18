@@ -1,0 +1,350 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Estimasi Kelimpahan Relatif Tuna Sirip Kuning</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+
+body{
+font-family:"Times New Roman", Times, serif;
+margin:0;
+background:#e3f2fd;
+line-height:1.7;
+}
+
+/* HEADER */
+
+header{
+background:#0b3d91;
+color:white;
+text-align:center;
+padding:80px 20px;
+}
+
+header h1{
+font-size:36px;
+}
+
+header p{
+font-size:18px;
+margin:5px;
+}
+
+/* CONTAINER */
+
+.container{
+width:85%;
+margin:auto;
+background:white;
+padding:30px;
+margin-top:30px;
+margin-bottom:40px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+border-radius:10px;
+}
+
+h2{
+color:#0b3d91;
+border-bottom:2px solid #0b3d91;
+padding-bottom:5px;
+}
+
+/* IMAGE */
+
+img{
+width:100%;
+border-radius:8px;
+margin-top:10px;
+margin-bottom:15px;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+table,th,td{
+border:1px solid #0b3d91;
+}
+
+th{
+background:#0b3d91;
+color:white;
+}
+
+th,td{
+padding:10px;
+text-align:center;
+}
+
+/* MAP */
+
+#map{
+height:450px;
+margin-top:20px;
+border:3px solid #0b3d91;
+border-radius:8px;
+}
+
+/* LEGEND */
+
+.legend{
+background:white;
+padding:10px;
+margin-top:10px;
+border:1px solid #ccc;
+width:250px;
+font-size:14px;
+}
+
+.legend span{
+display:inline-block;
+width:15px;
+height:15px;
+margin-right:5px;
+}
+
+footer{
+background:#0b3d91;
+color:white;
+text-align:center;
+padding:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>Estimasi Kelimpahan Relatif Ikan Tuna Sirip Kuning</h1>
+<p>Berdasarkan CPUE pada Alat Tangkap Pukat Cincin</p>
+
+<br>
+
+<p><b>Indah Mutiara Kusuma</b></p>
+<p>NIM : 08051182328001</p>
+
+</header>
+
+
+<div class="container">
+
+<h2>Latar Belakang</h2>
+
+<p>
+Ikan tuna sirip kuning merupakan salah satu sumber daya perikanan pelagis
+besar yang memiliki nilai ekonomi tinggi. Tingginya permintaan pasar
+internasional terhadap komoditas tuna menyebabkan aktivitas penangkapan
+ikan ini semakin meningkat setiap tahunnya. Jika tidak dikelola secara
+berkelanjutan, eksploitasi yang berlebihan dapat menyebabkan penurunan
+stok ikan tuna di perairan. Oleh karena itu, diperlukan analisis ilmiah
+untuk mengetahui kondisi sumber daya ikan tuna melalui pendekatan
+pendugaan kelimpahan relatif menggunakan indikator Catch Per Unit Effort
+(CPUE).
+</p>
+
+<h2>Ikan Tuna Sirip Kuning</h2>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Yellowfin_tuna.jpg">
+
+<p>
+Tuna sirip kuning (<i>Thunnus albacares</i>) merupakan spesies tuna yang
+banyak ditemukan di perairan tropis dan subtropis. Ikan ini memiliki
+ciri khas berupa sirip berwarna kuning cerah, tubuh memanjang,
+dan kemampuan berenang yang sangat cepat. Tuna sirip kuning sering
+ditangkap menggunakan alat tangkap pukat cincin (purse seine) yang
+banyak digunakan oleh nelayan di perairan Indonesia.
+</p>
+
+<h2>Klasifikasi Tuna Sirip Kuning</h2>
+
+<table>
+
+<tr>
+<th>Tingkatan</th>
+<th>Klasifikasi</th>
+</tr>
+
+<tr>
+<td>Kingdom</td>
+<td>Animalia</td>
+</tr>
+
+<tr>
+<td>Filum</td>
+<td>Chordata</td>
+</tr>
+
+<tr>
+<td>Kelas</td>
+<td>Actinopterygii</td>
+</tr>
+
+<tr>
+<td>Ordo</td>
+<td>Perciformes</td>
+</tr>
+
+<tr>
+<td>Famili</td>
+<td>Scombridae</td>
+</tr>
+
+<tr>
+<td>Genus</td>
+<td>Thunnus</td>
+</tr>
+
+<tr>
+<td>Spesies</td>
+<td>Thunnus albacares</td>
+</tr>
+
+</table>
+
+<h2>Tabel Data CPUE Tuna Sirip Kuning</h2>
+
+<table>
+
+<tr>
+<th>Tahun</th>
+<th>Total Tangkapan (Ton)</th>
+<th>Jumlah Trip</th>
+<th>CPUE (Ton/Trip)</th>
+</tr>
+
+<tr>
+<td>2019</td>
+<td>1500</td>
+<td>300</td>
+<td>5</td>
+</tr>
+
+<tr>
+<td>2020</td>
+<td>1420</td>
+<td>320</td>
+<td>4.43</td>
+</tr>
+
+<tr>
+<td>2021</td>
+<td>1350</td>
+<td>330</td>
+<td>4.09</td>
+</tr>
+
+<tr>
+<td>2022</td>
+<td>1280</td>
+<td>340</td>
+<td>3.76</td>
+</tr>
+
+</table>
+
+<h2>Tabel Zona Penangkapan Tuna</h2>
+
+<table>
+
+<tr>
+<th>Zona</th>
+<th>Wilayah Perairan</th>
+<th>Tingkat Potensi</th>
+</tr>
+
+<tr>
+<td>WPP 572</td>
+<td>Samudera Hindia Barat Sumatera</td>
+<td>Tinggi</td>
+</tr>
+
+<tr>
+<td>WPP 573</td>
+<td>Samudera Hindia Selatan Jawa</td>
+<td>Sangat Tinggi</td>
+</tr>
+
+<tr>
+<td>WPP 714</td>
+<td>Laut Banda</td>
+<td>Tinggi</td>
+</tr>
+
+<tr>
+<td>WPP 715</td>
+<td>Laut Maluku</td>
+<td>Sedang</td>
+</tr>
+
+</table>
+
+<h2>Peta Wilayah Penangkapan Tuna</h2>
+
+<div id="map"></div>
+
+<div class="legend">
+<b>Legenda:</b><br>
+<span style="background:red"></span> Zona Potensi Tinggi <br>
+<span style="background:orange"></span> Zona Potensi Sedang
+</div>
+
+<h2>Kesimpulan</h2>
+
+<p>
+Berdasarkan analisis CPUE, kelimpahan relatif ikan tuna sirip kuning
+dapat digunakan sebagai indikator penting untuk menilai kondisi stok
+ikan di suatu wilayah perairan. Nilai CPUE yang cenderung menurun dapat
+mengindikasikan adanya tekanan penangkapan yang cukup tinggi. Oleh karena
+itu, pengelolaan perikanan yang berbasis pada data ilmiah sangat
+diperlukan agar pemanfaatan sumber daya ikan tuna dapat berlangsung
+secara berkelanjutan.
+</p>
+
+</div>
+
+<footer>
+Artikel WebGIS Perikanan Tuna
+</footer>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+var map = L.map('map').setView([-3,120],5);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'© OpenStreetMap'
+}).addTo(map);
+
+var zona = [
+
+{nama:"Samudera Hindia Selatan Jawa",lat:-8,lon:110},
+{nama:"Laut Banda",lat:-5,lon:129},
+{nama:"Laut Maluku",lat:1,lon:127}
+
+];
+
+zona.forEach(function(data){
+
+L.marker([data.lat,data.lon])
+.addTo(map)
+.bindPopup(data.nama);
+
+});
+
+</script>
+
+</body>
+</html>
+```
